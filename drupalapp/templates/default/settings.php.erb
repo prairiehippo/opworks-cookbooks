@@ -566,7 +566,11 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  */
 # $conf['allow_authorize_operations'] = FALSE;
 
-include "<%=@deploy[:deploy_to]}/shared/config/opsworks.php%>";
+/*
+Include OpWorks database config file.
+@todo need to add error handling if file doesn't exist
+*/
+include "<%=config_file_path%>";
 $db = new OpsWorksDb();
 
 $databases['default']['default'] = array(
