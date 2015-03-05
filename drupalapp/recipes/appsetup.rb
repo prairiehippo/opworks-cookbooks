@@ -2,7 +2,7 @@ node[:deploy].each do |app_name, deploy|
 
   template "#{deploy[:deploy_to]}/current/sites/default/settings.php" do
     source "settings.php.erb"
-    mode 0660
+    mode '0660'
     group deploy[:group]
 
     if platform?("ubuntu")
@@ -11,13 +11,20 @@ node[:deploy].each do |app_name, deploy|
       owner "apache"
     end
 
+    # variables(
+    #   :host =>     (node[:drupalapp][:database][:host] rescue nil),
+    #   :user =>     (node[:drupalapp][:database][:username] rescue nil),
+    #   :password => (node[:drupalapp][:database][:password] rescue nil),
+    #   :db =>       (node[:drupalapp][:database][:database] rescue nil),
+    #   :table =>    (node[:phpapp][:dbtable] rescue nil),
+    #   :deploy => (deploy rescue nil)
+    # )
+
     variables(
-      :host =>     (node[:drupalapp][:database][:host] rescue nil),
-      :user =>     (node[:drupalapp][:database][:username] rescue nil),
-      :password => (node[:drupalapp][:database][:password] rescue nil),
-      :db =>       (node[:drupalapp][:database][:database] rescue nil),
-      :table =>    (node[:phpapp][:dbtable] rescue nil),
-      :deploy => (deploy rescue nil)
+      :database => deploy[:database],
+      :memcached => deploy[:memcached],
+      :layers => node[:opsworks][:layers],
+      :stack_name => node[:opsworks][:stack][:name]
     )
 
    only_if do

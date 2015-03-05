@@ -566,12 +566,15 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  */
 # $conf['allow_authorize_operations'] = FALSE;
 
+include "#{deploy[:deploy_to]}/shared/config/opsworks.php";
+$db = new OpsWorksDb();
+
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => '<%= @db%>',
-  'username' => '<%= @user%>',
-  'password' => '<%= @password%>',
-  'host' => '<%= @host%>',
+  'database' => $db->database,
+  'username' => $db->username,
+  'password' => $db->password,
+  'host' => $db->host,
   'prefix' => '',
   'collation' => 'utf8_general_ci',
 );
