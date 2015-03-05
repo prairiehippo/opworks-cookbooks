@@ -24,7 +24,8 @@ node[:deploy].each do |app_name, deploy|
       :database => deploy[:database],
       :memcached => deploy[:memcached],
       :layers => node[:opsworks][:layers],
-      :stack_name => node[:opsworks][:stack][:name]
+      :stack_name => node[:opsworks][:stack][:name],
+      :config_file_path => "#{deploy[:deploy_to]}/shared/config/opsworks.php",
     )
 
    only_if do
