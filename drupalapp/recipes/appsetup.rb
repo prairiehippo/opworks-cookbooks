@@ -12,10 +12,10 @@ node[:deploy].each do |app_name, deploy|
     end
 
     variables(
-      :host =>     (deploy[:database][:host] rescue nil),
-      :user =>     (deploy[:database][:username] rescue nil),
-      :password => (deploy[:database][:password] rescue nil),
-      :db =>       (deploy[:database][:database] rescue nil),
+      :host =>     (node[:drupalapp][:database][:host] rescue nil),
+      :user =>     (node[:drupalapp][:database][:username] rescue nil),
+      :password => (node[:drupalapp][:database][:password] rescue nil),
+      :db =>       (node[:drupalapp][:database][:database] rescue nil),
       :table =>    (node[:phpapp][:dbtable] rescue nil)
     )
 
