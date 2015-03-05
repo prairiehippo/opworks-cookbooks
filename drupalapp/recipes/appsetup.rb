@@ -16,7 +16,8 @@ node[:deploy].each do |app_name, deploy|
       :user =>     (node[:drupalapp][:database][:username] rescue nil),
       :password => (node[:drupalapp][:database][:password] rescue nil),
       :db =>       (node[:drupalapp][:database][:database] rescue nil),
-      :table =>    (node[:phpapp][:dbtable] rescue nil)
+      :table =>    (node[:phpapp][:dbtable] rescue nil),
+      :deploy => (deploy rescue nil)
     )
 
    only_if do
