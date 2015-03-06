@@ -11,15 +11,6 @@ node[:deploy].each do |app_name, deploy|
       owner "apache"
     end
 
-    # variables(
-    #   :host =>     (node[:drupalapp][:database][:host] rescue nil),
-    #   :user =>     (node[:drupalapp][:database][:username] rescue nil),
-    #   :password => (node[:drupalapp][:database][:password] rescue nil),
-    #   :db =>       (node[:drupalapp][:database][:database] rescue nil),
-    #   :table =>    (node[:phpapp][:dbtable] rescue nil),
-    #   :deploy => (deploy rescue nil)
-    # )
-
     variables(
       :database => deploy[:database],
       :memcached => deploy[:memcached],
